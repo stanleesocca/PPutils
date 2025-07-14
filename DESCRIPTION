@@ -1,0 +1,15 @@
+Package: PPutils
+Type: Package
+Title: Utility functions for dtPP application 
+Version: 0.1.0
+Authors@R: c(
+    person(
+      "Stanley", "Nmor",
+      email = "stanley.nmor@nioz.nl",
+      role = c("aut", "cre")
+    )
+  )
+Description: Experimental functions to augment dtRtools and dtRprimprod for primary production calculation. 
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
