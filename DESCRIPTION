@@ -13,3 +13,5 @@ Description: Experimental functions to augment dtRtools and dtRprimprod for prim
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/stanleesocca/PPutils
+BugReports: https://github.com/stanleesocca/PPutils/issues
