@@ -244,7 +244,7 @@ spatial_operation <- function(X, fun, ...){
 
 load_irradiance <- function(dir, file, bbox,
                             output_xy, output_t,...){
-  Irradiance <- readKNMI(dir  = dir,
+  Irradiance <- read_KNMI(dir  = dir,
                          file = file)[ ,c("station", "datetime", "radiation")]
 
 
@@ -320,7 +320,7 @@ load_water_height <- function(RWS_file,
   WadHeightHR <- reshape_water_height_wide(RWS_file)
 
 
-  WadHeightHR_Long <- dttolong(WadHeightHR, vname = "Height")
+  WadHeightHR_Long <- dt_tolong(WadHeightHR, vname = "Height")
   WadHeightHR_Long_station <- meta(WadHeightHR_Long)$stations
 
 
@@ -393,7 +393,7 @@ load_water_temperature <- function(RWS_file, output_xy,
   WadTempHR <- WadTempHR[order(WadTempHR$datetime), ]
 
 
-  WT <- dttolong(WadTempHR, vname = "Temperature")
+  WT <- dt_tolong(WadTempHR, vname = "Temperature")
   Temp_stations <- meta(TempWad)$stations
 
 
