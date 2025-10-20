@@ -539,14 +539,25 @@ calculate_pelagic_primary_production <- function(bathymetric_file,
   tHeight <- t(as.matrix(WHeight[, -c(1, 2)]))
 
 
+  # system.time(
+  #   ppPel <- intPP_mixed(bathymetric_file$depth,
+  #                        tKd,
+  #                        tIrrad,
+  #                        tAlpha,
+  #                        tEopt,
+  #                        tPs,
+  #                        tHeight
+  #   )
+  # )
+
   system.time(
-    ppPel <- intPP_mixed(bathymetric_file$depth,
-                         tKd,
-                         tIrrad,
-                         tAlpha,
-                         tEopt,
-                         tPs,
-                         tHeight
+    ppPel <- rs_mixed_PP(zmax = bathymetric_file$depth,
+                         kz = tKd,
+                         par = tIrrad,
+                         alfa = tAlpha,
+                         eopt = tEopt,
+                         pmax = tPs,
+                         height = tHeight
     )
   )
 
@@ -728,13 +739,21 @@ calculate_benthic_primary_production <- function(bathymetric_file,
 
   # Benthic primary production,
   # exponentially declining chlorophyll concentration, a function of silt fraction
-  ppBen <- intPP_exp(as.vector(rep(zn, times = nrow(bathymetric_file))),
-                     as.vector(Sediment_grid$Kd),
-                     as.vector(Sediment_grid$silt/100),
-                     as.matrix(Rad),
-                     as.matrix(BAlpha      [, -1]),
-                     as.matrix(BEopt       [, -1]),
-                     as.matrix(BPs         [, -1]))
+  # ppBen <- intPP_exp(as.vector(rep(zn, times = nrow(bathymetric_file))),
+  #                    as.vector(Sediment_grid$Kd),
+  #                    as.vector(Sediment_grid$silt/100),
+  #                    as.matrix(Rad),
+  #                    as.matrix(BAlpha      [, -1]),
+  #                    as.matrix(BEopt       [, -1]),
+  #                    as.matrix(BPs         [, -1]))
+  
+  ppBen <- rs_exp_PP(zmax = as.vector(rep(zn, times = nrow(bathymetric_file))),
+                     kz = as.vector(Sediment_grid$Kd),
+                     pmud = as.vector(Sediment_grid$silt/100),
+                     par = as.matrix(Rad),
+                     alfa = as.matrix(BAlpha      [, -1]),
+                     eopt = as.matrix(BEopt       [, -1]),
+                     pmax = as.matrix(BPs         [, -1]))
 
   return(list(Rad = Rad, ppBen = ppBen))
 
