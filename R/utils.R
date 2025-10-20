@@ -433,6 +433,7 @@ load_photosynthesis <- function(PPS, WT, biogeo_data,
   colnames(WT)[4] <- "date"
 
   select <- c("station", "date", "alpha", "eopt", "ps", "Chla_ug.L", "Kd")
+  #select <- c("station", "datetime", "alpha", "eopt", "pmax", "Chla_ug.L", "Kd")
 
   PS_data <- merge(WT[, c("station", "date", "Temperature")],
                    PPS [, select], # PS parameters
@@ -445,7 +446,7 @@ load_photosynthesis <- function(PPS, WT, biogeo_data,
 
 
   # Eopt
-  select <- c("station", "date", "alpha", "eopt", "ps", "Chla_ug.L", "Kd")
+  #select <- c("station", "date", "alpha", "eopt", "ps", "Chla_ug.L", "Kd")
   PS_data <- merge(biogeo_data[, c("station", "date", "Temperature")],
                    PPS    [, select],    # PS parameters
                    all = TRUE,
