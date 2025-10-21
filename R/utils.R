@@ -731,10 +731,10 @@ calculate_benthic_primary_production <- function(bathymetric_file,
                                                  BEopt, BPs, WHeight,
                                                  zn = 0.002  # depth of chlorophyll layer
 ){
-  Rad <- rad_bot(bathymetric_file$depth,
-                 t(as.matrix(WKd    [, -c(1, 2)])),
-                 t(as.matrix(Irrad  [, -c(1, 2)])),
-                 t(as.matrix(WHeight[, -c(1, 2)])))
+  Rad <- radiation_bot(zmax = bathymetric_file$depth,
+                 kz = t(as.matrix(WKd    [, -c(1, 2)])),
+                 par = t(as.matrix(Irrad  [, -c(1, 2)])),
+                 height = t(as.matrix(WHeight[, -c(1, 2)])))
 
 
   # Benthic primary production,
