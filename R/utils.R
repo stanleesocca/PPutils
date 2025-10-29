@@ -9,6 +9,29 @@ get_acolite_vars <- function(files, ...){
   return(unique(vars))
 }
 
+get_date <- function(date_str){
+  res <- str_extract(date_str, 
+                     "[0-9]{8}T[0-9]{6}")
+  
+  res_date <- paste0(str_sub(res, start = 1, end = 4), "-",
+                     str_sub(res, start = 5, end = 6), "-",
+                     str_sub(res, start = 7, end = 8), " ",
+                     str_sub(res, start = 10, end = 11), ":",  
+                     str_sub(res, start = 12, end = 13), ":", 
+                     str_sub(res, start = 14, end = 15))
+  
+  res_date <- as.POSIXct(res_date, tz = "CET")
+  res_date
+}
+
+get_common_idx <- function(dlist, dfiles, common_date){
+  idx_common_date <- which( dlist %in% common_date)
+  
+  out <- tibble(date = dlist[idx_common_date], 
+              file = dfiles[idx_common_date])
+  return(out)
+}
+
 get_datatake_date <- function(date_str){
   res <- str_extract(date_str,
                      "[0-9]{8}T[0-9]{6}")
